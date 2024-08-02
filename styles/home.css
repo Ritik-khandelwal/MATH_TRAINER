@@ -123,6 +123,9 @@ button#apply_settings:hover {
     color: #C9C9C9;
 }
 
+.calculation-checkbox {
+    margin-right: 15px; /* Adjust the spacing as needed */
+}
 
 .main .question {
     color: #C9C9C9;
