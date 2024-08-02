@@ -6,6 +6,8 @@ const delay = 300;
 let total_time = 0;
 let average_time = 0;
 let startTime;
+let times = []; // Array to keep track of times for each question
+let speedometerGauge;
 
 // Function to retrieve user input values
 
@@ -42,11 +44,11 @@ document.getElementById('apply_settings').addEventListener('click', () => {
     // Reset counters and start the quiz with new settings
     questionsAnswered = 0;
     total_time = 0;
+    times = [];
+    startQuiz();
     
     // Auto focus on the answer input
     document.getElementById('calculated').focus();
-    
-    startQuiz();
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -54,6 +56,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const storedCalculationTypes = JSON.parse(localStorage.getItem('calculationTypes'));
     const storedTotalQuestions = localStorage.getItem('totalNumberOfQuestions');
     const storedEndingRange = localStorage.getItem('endingRange');
+
+    // Initialize the speedometer gauge
+    speedometerGauge = new JustGage({
+        id: 'speedometer',
+        value: 0,
+        min: 0,
+        max: 10,
+        title: 'Speed',
+        label: 'sec',
+        pointer: true,
+        gaugeWidthScale: 0.6,
+        counter: true,
+    });
 
     // Set default values if no values are found in local storage
     typesofcalculation = storedCalculationTypes || ["add"];
@@ -86,9 +101,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+function updateSpeedometer() {
+    const timeList = document.getElementById('timeList');
+    timeList.innerHTML = ''; // Clear the existing list
+
+    // Iterate over the times array and update the speedometer and list
+    times.forEach((time, index) => {
+        let timeInSeconds = (time / 1000).toFixed(2);
+        
+        // Update speedometer with the last time value
+        if (index === times.length - 1) {
+            speedometerGauge.refresh(timeInSeconds);
+        }
+
+        // Update the list of times taken for each question
+        const newTimeEntry = document.createElement('li');
+        newTimeEntry.textContent = `Question ${index + 1}: ${timeInSeconds} sec`;
+        timeList.appendChild(newTimeEntry);
+        console.log(times);
+    });
+}
+
+
 function startQuiz() {
     if (questionsAnswered < total_number_of_questions) {
         generateQuestion();
+        updateSpeedometer();
     } else {
         console.log("Quiz completed! Total Time: " + (total_time / 1000) + " seconds");
         let total_time_field = document.querySelector(".total_time");
@@ -98,6 +136,7 @@ function startQuiz() {
 
         let average_time_field = document.querySelector(".average_time");
         average_time_field.innerHTML = `Average Time: ${(average_time / 1000).toFixed(2)} sec`;
+        updateSpeedometer();
     }
 }
 
@@ -135,7 +174,8 @@ function add() {
             console.log("Correct answer! Questions answered: " + questionsAnswered);
 
             let endTime = performance.now();
-            let time_taken = endTime - startTime;
+            time_taken = endTime - startTime;
+            times.push(time_taken); // Add the time taken to the times array
             console.log("Time Taken: " + time_taken);
             total_time += time_taken;
 
@@ -169,6 +209,7 @@ function sub() {
 
             let endTime = performance.now();
             let time_taken = endTime - startTime;
+            times.push(time_taken); // Add the time taken to the times array
             console.log("Time Taken: " + time_taken);
             total_time += time_taken;
 
@@ -202,6 +243,7 @@ function mul() {
 
             let endTime = performance.now();
             let time_taken = endTime - startTime;
+            times.push(time_taken); // Add the time taken to the times array
             console.log("Time Taken: " + time_taken);
             total_time += time_taken;
 
@@ -235,6 +277,7 @@ function div() {
 
             let endTime = performance.now();
             let time_taken = endTime - startTime;
+            times.push(time_taken); // Add the time taken to the times array
             console.log("Time Taken: " + time_taken);
             total_time += time_taken;
 

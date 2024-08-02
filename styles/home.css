@@ -59,10 +59,40 @@ html, body {
     color: #C9C9C9;
 }
 
+.extraResults {
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.time-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    max-height: 53%; /* Set a fixed height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.time-list::-webkit-scrollbar {
+    display: none;
+}
+
+.time-list li {
+    background: #4C7F4D;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 4px;
+    color: #141414;
+    font-weight: bold;
+}
+
 .userInput {
     width: 90%;
     max-width: 600px;
-    margin: 0 auto;
     padding: 20px;
     background-color: #141414;
     border-radius: 15px;

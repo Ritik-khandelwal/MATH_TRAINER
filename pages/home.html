@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Include JustGage and Raphael.js -->
     <title>Math Trainer - Practice Mental Math</title>
 </head>
 <body>
@@ -22,17 +23,17 @@
                 <label><input type="checkbox" name="calculation" value="mul" class="calculation-checkbox">Multiply</label><br>
                 <label><input type="checkbox" name="calculation" value="div" class="calculation-checkbox">Divide</label>
             </fieldset>
-
+            
             <div class="input-group">
                 <label for="total_number_of_questions">Number of Questions:</label>
                 <input type="number" id="total_number_of_questions" value="5" min="1">
             </div>
-
+            
             <div class="input-group">
                 <label for="ending_range">Number Range:</label>
                 <input type="number" id="ending_range" value="10" min="1">
             </div>
-
+            
             <button id="apply_settings">Apply Settings</button>
         </div></div>
         <div class="container">
@@ -41,7 +42,12 @@
                 <div class="answer"><input type="text" id="calculated" placeholder="?" autofocus></div>
             </div>
         </div>
-        <div class="right"><div class="extraResults"></div></div>
+        <div class="right"><div class="extraResults">
+            <h3>Results</h3>
+            <!-- Speedometer Container -->
+            <div id="speedometer" style="width:100%; height:40%;"></div>
+            <ul class="time-list" id="timeList"></ul>
+        </div></div>
     </div>
     <div class="results">
         <div class="total_time">Total Time: 0.00 sec</div>
@@ -51,7 +57,9 @@
         <button id="startbutton"
         onclick="main()">START</button>
     </div>
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/raphael@2.3.0/raphael.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/justgage@1.3.5/justgage.js"></script>
     <script src="../functions/home.js"></script>
 </body>
 </html>
