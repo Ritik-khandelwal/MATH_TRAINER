@@ -163,6 +163,11 @@ button#apply_settings:hover {
     font-weight: 400;
 }
 
+.answer {
+    font-size: 100px;
+    float: right;
+}
+
 .main .answer input {
     background: transparent;
     border: none;

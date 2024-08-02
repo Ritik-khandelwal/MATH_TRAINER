@@ -98,7 +98,6 @@ document.getElementById('apply_settings').addEventListener('click', () => {
     questionsAnswered = 0;
     total_time = 0;
     times = [];
-    startQuiz();
     
     // Auto focus on the answer input
     document.getElementById('calculated').focus();
@@ -153,6 +152,11 @@ function startQuiz() {
         let average_time_field = document.querySelector(".average_time");
         average_time_field.innerHTML = `Average Time: ${(average_time / 1000).toFixed(2)} sec`;
         updateSpeedometer();
+
+        document.querySelector('.question').innerText = `Ended`;
+        // Replace the input field with an emoji
+        let answerDiv = document.querySelector('.answer');
+        answerDiv.innerHTML = '🎉'; // You can change the emoji to any other you prefer
     }
 }
 
@@ -304,5 +308,3 @@ function div() {
 
     user_answer.addEventListener('input', listener);
 }
-
-startQuiz();
