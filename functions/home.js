@@ -22,6 +22,59 @@ function getUserSettings() {
 
 // Event listener to apply settings
 
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Retrieve and set stored values if they exist
+    const storedCalculationTypes = JSON.parse(localStorage.getItem('calculationTypes'));
+    const storedTotalQuestions = localStorage.getItem('totalNumberOfQuestions');
+    const storedEndingRange = localStorage.getItem('endingRange');
+    
+    document.querySelector('.question').innerText = `Ready`;
+
+    // Initialize the speedometer gauge
+    speedometerGauge = new JustGage({
+        id: 'speedometer',
+        value: 0,
+        min: 0,
+        max: 10,
+        title: 'Speed',
+        label: 'sec',
+        pointer: true,
+        gaugeWidthScale: 0.6,
+        counter: true,
+    });
+    
+    // Set default values if no values are found in local storage
+    typesofcalculation = storedCalculationTypes || ["add"];
+    total_number_of_questions = storedTotalQuestions ? parseInt(storedTotalQuestions, 10) : 5;
+    ending_range = storedEndingRange ? parseInt(storedEndingRange, 10) : 5;
+    
+    // Apply these settings to the input fields and checkboxes
+    document.getElementById('total_number_of_questions').value = total_number_of_questions;
+    document.getElementById('ending_range').value = ending_range;
+    
+    // Set stored checkbox values
+    typesofcalculation.forEach(type => {
+        document.querySelector(`input[name="calculation"][value="${type}"]`).checked = true;
+    });
+    
+    // Add event listeners to save values on change
+    document.getElementById('total_number_of_questions').addEventListener('input', (event) => {
+        localStorage.setItem('totalNumberOfQuestions', event.target.value);
+    });
+    
+    document.getElementById('ending_range').addEventListener('input', (event) => {
+        localStorage.setItem('endingRange', event.target.value);
+    });
+    
+    document.querySelectorAll('input[name="calculation"]').forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            const selectedTypes = Array.from(document.querySelectorAll('input[name="calculation"]:checked')).map(cb => cb.value);
+            localStorage.setItem('calculationTypes', JSON.stringify(selectedTypes));
+        });
+    });
+});
+
 document.getElementById('apply_settings').addEventListener('click', () => {
     let selectedTypes = Array.from(document.querySelectorAll('input[name="calculation"]:checked')).map(cb => cb.value);
     
@@ -51,60 +104,23 @@ document.getElementById('apply_settings').addEventListener('click', () => {
     document.getElementById('calculated').focus();
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Retrieve and set stored values if they exist
-    const storedCalculationTypes = JSON.parse(localStorage.getItem('calculationTypes'));
-    const storedTotalQuestions = localStorage.getItem('totalNumberOfQuestions');
-    const storedEndingRange = localStorage.getItem('endingRange');
-
-    // Initialize the speedometer gauge
-    speedometerGauge = new JustGage({
-        id: 'speedometer',
-        value: 0,
-        min: 0,
-        max: 10,
-        title: 'Speed',
-        label: 'sec',
-        pointer: true,
-        gaugeWidthScale: 0.6,
-        counter: true,
-    });
-
-    // Set default values if no values are found in local storage
-    typesofcalculation = storedCalculationTypes || ["add"];
-    total_number_of_questions = storedTotalQuestions ? parseInt(storedTotalQuestions, 10) : 5;
-    ending_range = storedEndingRange ? parseInt(storedEndingRange, 10) : 5;
-
-    // Apply these settings to the input fields and checkboxes
-    document.getElementById('total_number_of_questions').value = total_number_of_questions;
-    document.getElementById('ending_range').value = ending_range;
-
-    // Set stored checkbox values
-    typesofcalculation.forEach(type => {
-        document.querySelector(`input[name="calculation"][value="${type}"]`).checked = true;
-    });
-
-    // Add event listeners to save values on change
-    document.getElementById('total_number_of_questions').addEventListener('input', (event) => {
-        localStorage.setItem('totalNumberOfQuestions', event.target.value);
-    });
-
-    document.getElementById('ending_range').addEventListener('input', (event) => {
-        localStorage.setItem('endingRange', event.target.value);
-    });
-
-    document.querySelectorAll('input[name="calculation"]').forEach(checkbox => {
-        checkbox.addEventListener('change', () => {
-            const selectedTypes = Array.from(document.querySelectorAll('input[name="calculation"]:checked')).map(cb => cb.value);
-            localStorage.setItem('calculationTypes', JSON.stringify(selectedTypes));
-        });
-    });
+document.getElementById('startbutton').addEventListener('click', () => {
+    if (document.getElementById('startbutton').innerText === 'START') {
+        document.getElementById('startbutton').innerText = 'RESET';
+        document.getElementById('startbutton').style.backgroundColor = '#c22f2f';
+        document.querySelector('#calculated').value = '';
+        // Auto focus on the answer input
+        document.getElementById('calculated').focus();
+        startQuiz();
+    } else {
+        location.reload();
+    }
 });
 
 function updateSpeedometer() {
     const timeList = document.getElementById('timeList');
     timeList.innerHTML = ''; // Clear the existing list
-
+    
     // Iterate over the times array and update the speedometer and list
     times.forEach((time, index) => {
         let timeInSeconds = (time / 1000).toFixed(2);
@@ -113,7 +129,7 @@ function updateSpeedometer() {
         if (index === times.length - 1) {
             speedometerGauge.refresh(timeInSeconds);
         }
-
+        
         // Update the list of times taken for each question
         const newTimeEntry = document.createElement('li');
         newTimeEntry.textContent = `Question ${index + 1}: ${timeInSeconds} sec`;
