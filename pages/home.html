@@ -9,19 +9,27 @@
 </head>
 <body>
     <div class="header">
-        <h4>MATH TRAINER</h4>
+        <h4>MATH TRAINER - by RITIK KHANDELWAL</h4>
     </div>
     <div class="main">
+        <div class="left"><div class="userInput"></div></div>
         <div class="container">
-            <div class="question"></div>
-            <div class="answer"><input type="text" id="calculated" placeholder="?" autofocus></div>
+            <div class="innercontainer">
+                <div class="question"></div>
+                <div class="answer"><input type="text" id="calculated" placeholder="?" autofocus></div>
+            </div>
         </div>
+        <div class="right"><div class="extraResults"></div></div>
+    </div>
+    <div class="results">
+        <div class="total_time">Total Time: 0.00 sec</div>
+        <div class="average_time">Average Time: 0.00 sec</div>
     </div>
     <div class="footer">
         <button id="startbutton"
         onclick="main()">START</button>
     </div>
 
-    <script src="/functions/home.js"></script>
+    <script src="../functions/home.js"></script>
 </body>
 </html>

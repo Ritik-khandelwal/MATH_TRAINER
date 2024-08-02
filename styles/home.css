@@ -27,10 +27,35 @@ html, body {
 
 .main {
     width: 100vw;
-    height: 80.5vh;
+    height: 70.5vh;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.main .left, .right {
+    width: 25vw;
+    height: 70.5vh;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+    height: 70.5vh;
+}
+
+.main .left .userInput, .extraResults {
+    width: 90%;
+    height: 90%;
+    background-color: #141414;
+    border-radius: 15px;
+    color: #C9C9C9;
 }
 
 .main .question {
@@ -54,6 +79,30 @@ html, body {
 
 .main .answer input:focus {
     outline: none;
+}
+
+.results {
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 10vh;
+    width: 100%;
+}
+
+.total_time, .average_time {
+    text-align: center;
+    padding: 10px;
+    height: 5.5vh;
+    width: 30%;
+    background-color: #141414;
+    border-radius: 5px;
+    color: #C9C9C9;
+}
+
+.total_time:hover, .average_time:hover {
+    background-color: #3a3a3a; /* Slightly lighter background on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
 }
 
 .footer {
