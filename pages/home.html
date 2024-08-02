@@ -12,7 +12,29 @@
         <h4>MATH TRAINER - by RITIK KHANDELWAL</h4>
     </div>
     <div class="main">
-        <div class="left"><div class="userInput"></div></div>
+        <div class="left"><div class="userInput">
+            <h3>Settings</h3>
+            
+            <fieldset>
+                <legend>Types of Calculation:</legend>
+                <label><input type="checkbox" name="calculation" value="add" checked>&nbsp;&nbsp;&nbsp;Add</label><br>
+                <label><input type="checkbox" name="calculation" value="sub">&nbsp;&nbsp;&nbsp;Subtract</label><br>
+                <label><input type="checkbox" name="calculation" value="mul">&nbsp;&nbsp;&nbsp;Multiply</label><br>
+                <label><input type="checkbox" name="calculation" value="div">&nbsp;&nbsp;&nbsp;Divide</label>
+            </fieldset>
+
+            <div class="input-group">
+                <label for="total_number_of_questions">Number of Questions:</label>
+                <input type="number" id="total_number_of_questions" value="5" min="1">
+            </div>
+
+            <div class="input-group">
+                <label for="ending_range">Number Range:</label>
+                <input type="number" id="ending_range" value="10" min="1">
+            </div>
+
+            <button id="apply_settings">Apply Settings</button>
+        </div></div>
         <div class="container">
             <div class="innercontainer">
                 <div class="question"></div>
