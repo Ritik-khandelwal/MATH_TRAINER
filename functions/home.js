@@ -202,7 +202,7 @@ function add() {
             console.log("Correct answer! Questions answered: " + questionsAnswered);
 
             let endTime = performance.now();
-            time_taken = endTime - startTime;
+            let time_taken = endTime - startTime;
             times.push({ question: `${firstnumber} + ${secondnumber}`, time: time_taken, answer: user_answer.value }); // Add the question and time taken to the times array
             console.log("Time Taken: " + time_taken);
             total_time += time_taken;
@@ -305,7 +305,7 @@ function div() {
 
             let endTime = performance.now();
             let time_taken = endTime - startTime;
-            times.push({ question: `${firstnumber} / ${secondnumber}`, time: time_taken, answer: user_answer.value.toFixed(2) }); // Add the question and time taken to the times array
+            times.push({ question: `${firstnumber} / ${secondnumber}`, time: time_taken, answer: parseFloat(user_answer.value).toFixed(2) }); // Add the question and time taken to the times array
             console.log("Time Taken: " + time_taken);
             total_time += time_taken;
 
