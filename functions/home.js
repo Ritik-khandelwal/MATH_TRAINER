@@ -107,6 +107,12 @@ document.getElementById('apply_settings').addEventListener('click', () => {
     total_time = 0;
     times = [];
     
+    const confirm = document.querySelector("#apply_settings");
+    confirm.innerText = 'Applied';
+    setTimeout(() => {
+        confirm.innerText = 'Apply Settings';
+    }, delay+300);
+
     // Auto focus on the answer input
     document.getElementById('calculated').focus();
 });
