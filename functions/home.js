@@ -147,7 +147,6 @@ function updateSpeedometer() {
         const newTimeEntry = document.createElement('li');
         newTimeEntry.textContent = `${entry.question}: ${entry.answer} | ${timeInSeconds} sec`;
         timeList.appendChild(newTimeEntry);
-        console.log(times);
     });
 }
 
@@ -157,7 +156,6 @@ function startQuiz() {
         generateQuestion();
         updateSpeedometer();
     } else {
-        console.log("Quiz completed! Total Time: " + (total_time / 1000) + " seconds");
         let total_time_field = document.querySelector(".total_time");
         total_time_field.innerHTML = `Total Time: ${(total_time / 1000).toFixed(2)} sec`;
 
@@ -205,12 +203,10 @@ function add() {
         if (parseInt(user_answer.value) == actual_sum) {
             user_answer.style.color = "#4C7F4D";
             questionsAnswered++;
-            console.log("Correct answer! Questions answered: " + questionsAnswered);
 
             let endTime = performance.now();
             let time_taken = endTime - startTime;
             times.push({ question: `${firstnumber} + ${secondnumber}`, time: time_taken, answer: user_answer.value }); // Add the question and time taken to the times array
-            console.log("Time Taken: " + time_taken);
             total_time += time_taken;
 
             user_answer.removeEventListener('input', listener);
@@ -239,12 +235,10 @@ function sub() {
         if (parseInt(user_answer.value) == actual_sub) {
             user_answer.style.color = "#4C7F4D";
             questionsAnswered++;
-            console.log("Correct answer! Questions answered: " + questionsAnswered);
 
             let endTime = performance.now();
             let time_taken = endTime - startTime;
             times.push({ question: `${firstnumber} - ${secondnumber}`, time: time_taken, answer: user_answer.value }); // Add the question and time taken to the times array
-            console.log("Time Taken: " + time_taken);
             total_time += time_taken;
 
             user_answer.removeEventListener('input', listener);
@@ -273,12 +267,10 @@ function mul() {
         if (parseInt(user_answer.value) == actual_mul) {
             user_answer.style.color = "#4C7F4D";
             questionsAnswered++;
-            console.log("Correct answer! Questions answered: " + questionsAnswered);
 
             let endTime = performance.now();
             let time_taken = endTime - startTime;
             times.push({ question: `${firstnumber} * ${secondnumber}`, time: time_taken, answer: user_answer.value }); // Add the question and time taken to the times array
-            console.log("Time Taken: " + time_taken);
             total_time += time_taken;
 
             user_answer.removeEventListener('input', listener);
@@ -307,12 +299,10 @@ function div() {
         if (parseFloat(user_answer.value).toFixed(2) == actual_div) {
             user_answer.style.color = "#4C7F4D";
             questionsAnswered++;
-            console.log("Correct answer! Questions answered: " + questionsAnswered);
 
             let endTime = performance.now();
             let time_taken = endTime - startTime;
             times.push({ question: `${firstnumber} / ${secondnumber}`, time: time_taken, answer: parseFloat(user_answer.value).toFixed(2) }); // Add the question and time taken to the times array
-            console.log("Time Taken: " + time_taken);
             total_time += time_taken;
 
             user_answer.removeEventListener('input', listener);
