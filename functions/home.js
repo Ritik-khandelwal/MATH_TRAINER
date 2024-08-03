@@ -42,6 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
         pointer: true,
         gaugeWidthScale: 0.6,
         counter: true,
+        customSectors: [{
+            color: "#C9C9C9",
+            lo: 0,
+            hi: 10
+        }],
+        labelFontColor: '#C9C9C9',  // Change the color of the label
+        titleFontColor: '#C9C9C9',  // Change the color of the title
+        valueFontColor: '#C9C9C9',   // Change the color of the value
     });
     
     // Set default values if no values are found in local storage
@@ -121,8 +129,8 @@ function updateSpeedometer() {
     timeList.innerHTML = ''; // Clear the existing list
     
     // Iterate over the times array and update the speedometer and list
-    times.forEach((time, index) => {
-        let timeInSeconds = (time / 1000).toFixed(2);
+    times.forEach((entry, index) => {
+        let timeInSeconds = (entry.time / 1000).toFixed(2);
         
         // Update speedometer with the last time value
         if (index === times.length - 1) {
@@ -131,7 +139,7 @@ function updateSpeedometer() {
         
         // Update the list of times taken for each question
         const newTimeEntry = document.createElement('li');
-        newTimeEntry.textContent = `Question ${index + 1}: ${timeInSeconds} sec`;
+        newTimeEntry.textContent = `${entry.question}: ${entry.answer} | ${timeInSeconds} sec`;
         timeList.appendChild(newTimeEntry);
         console.log(times);
     });
@@ -195,7 +203,7 @@ function add() {
 
             let endTime = performance.now();
             time_taken = endTime - startTime;
-            times.push(time_taken); // Add the time taken to the times array
+            times.push({ question: `${firstnumber} + ${secondnumber}`, time: time_taken, answer: user_answer.value }); // Add the question and time taken to the times array
             console.log("Time Taken: " + time_taken);
             total_time += time_taken;
 
@@ -229,7 +237,7 @@ function sub() {
 
             let endTime = performance.now();
             let time_taken = endTime - startTime;
-            times.push(time_taken); // Add the time taken to the times array
+            times.push({ question: `${firstnumber} - ${secondnumber}`, time: time_taken, answer: user_answer.value }); // Add the question and time taken to the times array
             console.log("Time Taken: " + time_taken);
             total_time += time_taken;
 
@@ -263,7 +271,7 @@ function mul() {
 
             let endTime = performance.now();
             let time_taken = endTime - startTime;
-            times.push(time_taken); // Add the time taken to the times array
+            times.push({ question: `${firstnumber} * ${secondnumber}`, time: time_taken, answer: user_answer.value }); // Add the question and time taken to the times array
             console.log("Time Taken: " + time_taken);
             total_time += time_taken;
 
@@ -297,7 +305,7 @@ function div() {
 
             let endTime = performance.now();
             let time_taken = endTime - startTime;
-            times.push(time_taken); // Add the time taken to the times array
+            times.push({ question: `${firstnumber} / ${secondnumber}`, time: time_taken, answer: user_answer.value.toFixed(2) }); // Add the question and time taken to the times array
             console.log("Time Taken: " + time_taken);
             total_time += time_taken;
 
