@@ -228,3 +228,79 @@ button#startbutton:hover {
     background-color: #3a3a3a;
     color: #C9C9C9;
 }
+
+/* Responsive Design for larger screens */
+
+@media (min-width: 2560px) {
+    .main {
+        width: 100vw;
+        height: 80vh;
+    }
+
+    .main .left, .right {
+        width: 30vw;
+        height: 80vh;
+    }
+
+    .main .container {
+        width: 40vw;
+        height: 80vh;
+    }
+}
+
+/* Responsive Design for smaller screens */
+
+@media (max-width: 1024px) {
+    .main {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .header {
+        text-align: center;
+    }
+
+    h4 {
+        font-size: small;
+    }
+
+    #speedometer {
+        width: 40%;
+        height: 20%;
+    }
+
+    .main .left, .right, .main .container {
+        width: 90%;
+        height: auto;
+    }
+
+    .main .container {
+        order: 2;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .main .left {
+        order: 3;
+    }
+
+    .main .right {
+        order: 4;
+    }
+
+    .results {
+        order: 5;
+        flex-direction: column;
+        height: auto;
+    }
+
+    .results .total_time, .average_time {
+        width: 90%;
+        margin-bottom: 10px;
+    }
+
+    .footer {
+        order: 6;
+        height: auto;
+    }
+}
